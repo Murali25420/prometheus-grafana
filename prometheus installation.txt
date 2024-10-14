@@ -1,0 +1,45 @@
+add the repo : 
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+install the prometheus:
+
+helm install prometheus prometheus-community/prometheus
+
+prometheus.yml:
+
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'my_application'
+    static_configs:
+      - targets: ['localhost:9090']
+
+or 
+type this command:
+
+kubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-ext
+
+
+
+grafana:
+
+helm repo add grafana https://grafana.github.io/helm-charts
+
+helm repo update
+
+helm install grafana grafana/grafana
+
+
+kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
+
+kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-server-ext
+
+
+login to grafana dashboard & add data source as prometheus, add prometheus url 
+
+import default template for monitoring  dashboard code:3662
+
+
+
