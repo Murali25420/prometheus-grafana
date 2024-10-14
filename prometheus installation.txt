@@ -41,5 +41,7 @@ login to grafana dashboard & add data source as prometheus, add prometheus url
 
 import default template for monitoring  dashboard code:3662
 
+kubectl get cm (scrape configs in prometheus-server)
 
+to view the application status we need to update the app metrics in dev & config as scrape.
 
